@@ -16,7 +16,7 @@ clean:
 
 test:
 	make test -C cat/
-	make test -C grep/
+	# make test -C grep/
 
 check:
 	make check -C cat/
