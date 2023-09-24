@@ -6,9 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Flag {
+typedef struct {
     int b, e, n, s, t, v;
-}flag = { 0, 0, 0, 0, 0, 0};
+} Flag;
 
 void sfleta_cat(int argc, char const *argv[]);
 void buildOutput(const char** filePathArr, size_t filesCount);

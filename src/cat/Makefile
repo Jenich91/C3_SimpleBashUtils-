@@ -1,6 +1,5 @@
 .PHONY: all clean check test sfleta_cat
 CC=gcc -std=c11
-CC2=gcc -std=c11 -D_GNU_Source
 LDFLAGS= -Wall -Wextra -Werror
 OS := $(shell uname -s)
 
@@ -8,11 +7,20 @@ default: all
 
 all: sfleta_cat
 
+libname=sfleta_cat
+static_lib:
+	gcc -c -g $(libname).c
+	ar -rcs $(libname).a *.o
+	ar -rcs lib$(libname).a *.o
+
+use_lib: static_lib
+	$(CC) main.c -L. -l$(libname) -o $(libname)
+
 sfleta_cat: clean
 ifeq ($(OS), Darwin)
 	$(CC) $(LDFLAGS) *.c -o sfleta_cat	
 else
-	$(CC2) $(LDFLAGS) *.c -o sfleta_cat
+	$(CC) -D_GNU_Source $(LDFLAGS) *.c -o sfleta_cat
 endif
 
 clean:
@@ -20,7 +28,6 @@ clean:
 	rm -rf *_out
 	rm -rf *.dSYM
 	rm -rf *.cfg
-	rm -rf *.a
 	rm -rf *.o
 	rm -rf *.out
 	rm -rf *.gcno
@@ -28,12 +35,14 @@ clean:
 	rm -rf *.cov
 	rm -rf *.info
 	rm -rf report
+	# rm -rf *.a
+	# rm -rf $(libname)
 
 test:
 	sh test_cat.sh
 
 debug:
-	$(CC2) -g -Og -o sfleta_cat sfleta_cat.c 
+	$(CC) -D_GNU_Source -g -Og -o sfleta_cat sfleta_cat.c 
 
 check: debug
 	cppcheck *.h *.c

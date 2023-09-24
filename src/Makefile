@@ -5,10 +5,10 @@ default: all
 all: sfleta_cat sfleta_grep
 
 sfleta_cat:
-	make sfleta_cat -C cat/
+	make use_lib -C cat/
 
 sfleta_grep:
-	make sfleta_grep -C grep/
+	make use_lib -C grep/
 
 clean:
 	make clean -C cat/
@@ -16,7 +16,7 @@ clean:
 
 test:
 	make test -C cat/
-	# make test -C grep/
+	make test -C grep/
 
 check:
 	make check -C cat/

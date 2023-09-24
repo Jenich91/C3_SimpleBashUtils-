@@ -8,9 +8,9 @@
 #include <regex.h>
 #include <stdbool.h>
 
-struct Flag {
+typedef struct {
     int e, i, v, c, l, n, h, s, f, o, regflag;
-}flag = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+} Flag;
 
 void sfleta_grep(int argc, char const *argv[]);
 void buildOutput(const char** filePathArr, size_t filesCount,

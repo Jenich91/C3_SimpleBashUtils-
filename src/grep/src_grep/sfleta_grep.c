@@ -1,5 +1,7 @@
 #include "sfleta_grep.h"
 
+Flag flag = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
 void buildOutput(const char** filePathArr, size_t filesCount,
                  regex_t* redexArr, size_t redexCount, int emptyPatternFlag) {
     regex_t regObj;
@@ -151,7 +153,7 @@ void buildOutput(const char** filePathArr, size_t filesCount,
     }
 }
 
-void grep(int argc, char const *argv[]) {
+void sfleta_grep(int argc, char const *argv[]) {
     if (argc > 1) {
         FILE* file;
         const char* filePathArr[32];
@@ -252,9 +254,4 @@ void grep(int argc, char const *argv[]) {
             regfree(&redexArr[i]);
         }
     }
-}
-
-int main(int argc, char const *argv[]) {
-    grep(argc, argv);
-    return 0;
 }

@@ -1,5 +1,7 @@
 #include "sfleta_cat.h"
 
+Flag flag = { 0, 0, 0, 0, 0, 0};
+
 void printNonReadableChar(char c, int *NonBlankLineCount, int *everyLineCount) {
     if (c < -96) {
     c = c + 192;
@@ -176,9 +178,4 @@ void sfleta_cat(int argc, char const *argv[]) {
         }
         buildOutput(filePathArr, filesCount);
     }
-}
-
-int main(int argc, char const *argv[]) {
-    sfleta_cat(argc, argv);
-    return 0;
 }
